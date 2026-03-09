@@ -1,79 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://devconvert.com/</loc>
+    <loc>https://devconvert.online/</loc>
     <lastmod>2024-03-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://devconvert.com/tool/json-to-csv</loc>
+    <loc>https://devconvert.online/tool/json-to-csv</loc>
     <lastmod>2024-03-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://devconvert.com/tool/csv-to-json</loc>
+    <loc>https://devconvert.online/tool/csv-to-json</loc>
     <lastmod>2024-03-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://devconvert.com/tool/json-formatter</loc>
+    <loc>https://devconvert.online/tool/json-formatter</loc>
     <lastmod>2024-03-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://devconvert.com/tool/json-validator</loc>
+    <loc>https://devconvert.online/tool/json-validator</loc>
     <lastmod>2024-03-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://devconvert.com/tool/base64-encoder</loc>
+    <loc>https://devconvert.online/tool/base64-encoder</loc>
     <lastmod>2024-03-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://devconvert.com/tool/base64-decoder</loc>
+    <loc>https://devconvert.online/tool/base64-decoder</loc>
     <lastmod>2024-03-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://devconvert.com/tool/url-encoder</loc>
+    <loc>https://devconvert.online/tool/url-encoder</loc>
     <lastmod>2024-03-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://devconvert.com/tool/url-decoder</loc>
+    <loc>https://devconvert.online/tool/url-decoder</loc>
     <lastmod>2024-03-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://devconvert.com/tool/jwt-decoder</loc>
+    <loc>https://devconvert.online/tool/jwt-decoder</loc>
     <lastmod>2024-03-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://devconvert.com/tool/html-to-markdown</loc>
+    <loc>https://devconvert.online/tool/html-to-markdown</loc>
     <lastmod>2024-03-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://devconvert.com/tool/text-to-slug</loc>
+    <loc>https://devconvert.online/tool/text-to-slug</loc>
     <lastmod>2024-03-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://devconvert.com/tool/image-to-base64</loc>
+    <loc>https://devconvert.online/tool/image-to-base64</loc>
     <lastmod>2024-03-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://devconvert.com/sitemap.xml
+Sitemap: https://devconvert.online/sitemap.xml

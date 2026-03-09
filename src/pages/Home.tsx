@@ -41,7 +41,7 @@ export function Home() {
       <Helmet>
         <title>DevConvert - Ultimate Developer Utility Belt | Free Online Tools</title>
         <meta name="description" content="Free online developer tools: JSON formatter, Base64 encoder, JWT decoder, SQL formatter, and more. Fast, secure, and 100% client-side." />
-        <link rel="canonical" href="https://devconvert.com" />
+        <link rel="canonical" href="https://devconvert.online" />
       </Helmet>
       {/* Hero Section */}
       <div className="text-center mb-16">
