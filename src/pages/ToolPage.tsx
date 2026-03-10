@@ -29,6 +29,7 @@ import {
   useUUIDGenerator,
   usePasswordHashGenerator,
   useTextDiffChecker,
+  DiffViewer,
   useColorConverter,
   useAITool,
   useJWTExpirationChecker,
@@ -728,21 +729,32 @@ function PasswordHashGeneratorTool({ tool, minimal }: { tool: any; minimal?: boo
 }
 
 function TextDiffCheckerTool({ tool, minimal }: { tool: any; minimal?: boolean }) {
-  const { text1, setText1, text2, setText2, output, setOutput, process } = useTextDiffChecker();
+  const { text1, setText1, text2, setText2, diffResult, process } = useTextDiffChecker();
   return (
     <ToolPageLayout 
-      tool={tool} input={text1} output={output} minimal={minimal}
-      onProcess={process} onClear={() => { setText1(''); setText2(''); setOutput(''); }}
-      onCopy={() => navigator.clipboard.writeText(output)}
-      onDownload={() => downloadFile(output, 'diff.txt')}
-      onExport={() => downloadFile(output, 'diff.txt')}
+      tool={tool} input={text1} output={diffResult.length > 0 ? 'Diff generated' : ''} minimal={minimal}
+      onProcess={process} onClear={() => { setText1(''); setText2(''); }}
+      onCopy={() => {
+        const text = diffResult.map(c => (c.added ? '+ ' : c.removed ? '- ' : '  ') + c.value).join('');
+        navigator.clipboard.writeText(text);
+      }}
+      onDownload={() => {
+        const text = diffResult.map(c => (c.added ? '+ ' : c.removed ? '- ' : '  ') + c.value).join('');
+        downloadFile(text, 'diff.txt');
+      }}
     >
-      <div className="flex flex-col gap-6">
-        <div className="flex flex-col md:flex-row gap-6">
-          <ToolTextarea label="Original Text" value={text1} onChange={setText1} placeholder="Paste original text..." />
-          <ToolTextarea label="Modified Text" value={text2} onChange={setText2} placeholder="Paste modified text..." />
+      <div className="flex flex-col gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <ToolTextarea label="Original Text" value={text1} onChange={setText1} placeholder="Paste original text here..." />
+          <ToolTextarea label="Modified Text" value={text2} onChange={setText2} placeholder="Paste modified text here..." />
         </div>
-        <ToolTextarea label="Diff Result" value={output} readOnly placeholder="Differences will appear here..." />
+        
+        {diffResult.length > 0 && (
+          <div className="space-y-4">
+            <h3 className="text-sm font-bold text-zinc-900 dark:text-white uppercase tracking-wider">Visual Comparison</h3>
+            <DiffViewer changes={diffResult} />
+          </div>
+        )}
       </div>
     </ToolPageLayout>
   );

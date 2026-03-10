@@ -7,6 +7,7 @@ import { Plus, X } from 'lucide-react';
 import { GoogleGenAI } from "@google/genai";
 import CryptoJS from 'crypto-js';
 import yaml from 'js-yaml';
+import * as diff from 'diff';
 
 // Shared Textarea Component
 export function ToolTextarea({ 
@@ -654,27 +655,65 @@ export function usePasswordHashGenerator() {
 export function useTextDiffChecker() {
   const [text1, setText1] = useState('');
   const [text2, setText2] = useState('');
-  const [output, setOutput] = useState('');
+  const [diffResult, setDiffResult] = useState<diff.Change[]>([]);
 
   const process = useCallback(() => {
-    const lines1 = text1.split('\n');
-    const lines2 = text2.split('\n');
-    const maxLines = Math.max(lines1.length, lines2.length);
-    let diff = '';
-    for (let i = 0; i < maxLines; i++) {
-      const l1 = lines1[i] || '';
-      const l2 = lines2[i] || '';
-      if (l1 === l2) {
-        diff += `  ${l1}\n`;
-      } else {
-        if (i < lines1.length) diff += `- ${l1}\n`;
-        if (i < lines2.length) diff += `+ ${l2}\n`;
-      }
-    }
-    setOutput(diff);
+    const changes = diff.diffLines(text1, text2);
+    setDiffResult(changes);
   }, [text1, text2]);
 
-  return { text1, setText1, text2, setText2, output, setOutput, process };
+  return { text1, setText1, text2, setText2, diffResult, process };
+}
+
+export function DiffViewer({ changes }: { changes: diff.Change[] }) {
+  if (changes.length === 0) return null;
+
+  return (
+    <div className="w-full font-mono text-sm border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden bg-white dark:bg-zinc-950 shadow-sm">
+      <div className="bg-zinc-50 dark:bg-zinc-900 px-4 py-2 border-bottom border-zinc-200 dark:border-zinc-800 flex items-center justify-between">
+        <span className="text-xs font-bold text-zinc-500 uppercase tracking-wider">Diff Output</span>
+        <div className="flex gap-4">
+          <div className="flex items-center gap-1.5">
+            <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
+            <span className="text-[10px] text-zinc-500 uppercase font-bold">Added</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <div className="w-2 h-2 rounded-full bg-rose-500"></div>
+            <span className="text-[10px] text-zinc-500 uppercase font-bold">Removed</span>
+          </div>
+        </div>
+      </div>
+      <div className="overflow-x-auto">
+        <table className="w-full border-collapse">
+          <tbody>
+            {changes.map((change, i) => {
+              const lines = change.value.split('\n');
+              // Remove last empty line if it exists (split adds it if string ends with \n)
+              if (lines[lines.length - 1] === '') lines.pop();
+              
+              return lines.map((line, j) => (
+                <tr 
+                  key={`${i}-${j}`}
+                  className={`
+                    ${change.added ? 'bg-emerald-500/10 dark:bg-emerald-500/5 text-emerald-700 dark:text-emerald-400' : ''}
+                    ${change.removed ? 'bg-rose-500/10 dark:bg-rose-500/5 text-rose-700 dark:text-rose-400' : ''}
+                    ${!change.added && !change.removed ? 'text-zinc-600 dark:text-zinc-400' : ''}
+                  `}
+                >
+                  <td className="w-12 px-2 py-0.5 text-right select-none border-r border-zinc-100 dark:border-zinc-800/50 opacity-30 text-[10px]">
+                    {change.added ? '+' : change.removed ? '-' : ' '}
+                  </td>
+                  <td className="px-4 py-0.5 whitespace-pre break-all">
+                    {line || ' '}
+                  </td>
+                </tr>
+              ));
+            })}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 }
 
 // 24. Color Converter
